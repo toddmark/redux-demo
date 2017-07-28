@@ -1,9 +1,9 @@
-const todo = (state = 0, action) => {
-  switch(action.type) {
-    case 'ADD':
-      console.log(action)
-      return ++state;
-  }
-}
+import { combineReducers } from "redux";
 
-export default todo;
+import count from "./count.js";
+import todos from "./todos.js";
+
+export default combineReducers({
+  count,
+  todos
+})

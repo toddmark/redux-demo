@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, bindActionCreators } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
-
-//reducer
-import todo from './reducer/index.js';
+import store from './store/index.js'
+import DevTools from './tool/devTool.js';
 
 //action
-import { add } from './action/index.js';
+import { add, minus } from './action/index.js';
 
-let store = createStore(todo)
 
-@connect(count => ({count}))
+@connect(state =>  ({count: state.count.count}))
 class Index extends Component {
   render() {
     const { dispatch } = this.props;
+    let value = this.props.count
     return (
       <div>
-        <button onClick={() => dispatch(add())}> + </button>
-        <button> - </button>
-        <span>{this.props.count}</span>
+        <button onClick={() => {
+          dispatch(add(++value))}
+        }> + </button>
+        <button onClick={() => {
+          dispatch(minus(--value))}
+        }> - </button>
+         <span>{value}</span> 
       </div>
     )
   }
@@ -33,7 +35,10 @@ class Index extends Component {
 ReactDOM.render((
   <AppContainer>
     <Provider store={store}>
-      <Index />
+      <div>
+        <Index />
+        <DevTools />
+      </div>
     </Provider>
   </AppContainer>
 ), document.getElementById('app'));
