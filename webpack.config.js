@@ -2,11 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-  entry: { index: ['./src/index.jsx']},
+  entry: { index: ['./src/component/index.jsx']},
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
-    filename: '[name].js'
+    publicPath: './',
+    filename: '[name]-[hash].js'
   },
   devtool: 'source-map',
   module: {
